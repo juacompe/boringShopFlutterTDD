@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'CheckOutPage.dart';
 import 'ProductDetailsPage.dart';
 
 void main() {
@@ -70,6 +71,13 @@ class MyHomePage extends HookWidget {
         actions: [
           GestureDetector(
             key: Key("checkout"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CheckOutPage(cart: cart)),
+              );
+            },
             child: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 60, 0),
               child: Text("Cart: " + myCart.value.toString()),
