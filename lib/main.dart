@@ -57,6 +57,7 @@ class MyHomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     var thumbnailSize = MediaQuery.of(context).size.width * 0.2;
+    var itemsPerRow = 4;
     return Scaffold(
       appBar: AppBar(title: Text(title)),
       body: SingleChildScrollView(
@@ -66,15 +67,15 @@ class MyHomePage extends HookWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                for (int i = 0; i < (items.length / 4).ceil(); i++)
+                for (int i = 0; i < (items.length / itemsPerRow).ceil(); i++)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      for(int j = 0; j < (i + 1 == (items.length / 4).ceil() ? items.length % 4 : 4); j++)
+                      for(int j = 0; j < (i + 1 == (items.length / itemsPerRow).ceil() ? items.length % itemsPerRow : itemsPerRow); j++)
                         Container(
                           child: GestureDetector(
                             onTap: () {},
-                            key: Key('item${(i * 4) + j + 1}'),
+                            key: Key('item${(i * itemsPerRow) + j + 1}'),
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 30),
                               child: Column(
@@ -85,11 +86,11 @@ class MyHomePage extends HookWidget {
                                     height: thumbnailSize,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.all(Radius.circular(thumbnailSize / 2)),
-                                      child: Image(image: NetworkImage(items[(i * 4) + j]['picture']), fit: BoxFit.cover)
+                                      child: Image(image: NetworkImage(items[(i * itemsPerRow) + j]['picture']), fit: BoxFit.cover)
                                     ),
                                   ),
                                   Padding(padding: EdgeInsets.only(top: 8.0)),
-                                  Text(items[(i * 4) + j]['name']),
+                                  Text(items[(i * itemsPerRow) + j]['name']),
                                 ],
                               )
                             )
