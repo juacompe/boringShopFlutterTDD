@@ -10,9 +10,29 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:boringshop/main.dart';
 
+class MyTestApp extends StatelessWidget {
+  List<dynamic> items = [
+    {
+      'name' : 'Matcha Tofu Tiramisu',
+      'id' : 0,
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Boring Shop',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MyHomePage(title: 'Boring Shop', items: items),
+    );
+  }
+}
+
 void main() {
   testWidgets('select an item and put in into shopping cart', (WidgetTester tester) async {
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(MyTestApp());
 
     expect(find.byKey(Key('item1')), findsOneWidget);
   });

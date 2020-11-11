@@ -6,6 +6,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  List<dynamic> items = [];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,15 +14,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Boring Shop'),
+      home: MyHomePage(title: 'Boring Shop', items: items),
     );
   }
 }
 
 class MyHomePage extends HookWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key key, this.title, this.items}) : super(key: key);
 
   final String title;
+  final List<dynamic> items;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,14 @@ class MyHomePage extends HookWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              child: GestureDetector(
+                onTap: () {
+                },
+                key: Key('item1'),
+                child: Text(items[0]['name'])
+              ),
+            )
           ],
         ),
       ),
