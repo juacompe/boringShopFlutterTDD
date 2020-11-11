@@ -11,6 +11,35 @@ class CheckOutPage extends HookWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Checkout")),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(children: [
+                  Text("Items:")
+                ]),
+                itemList(),
+              ]
+            )
+          )))
+    );
+  }
+
+  Widget itemList() {
+    return Container(
+      child: Column(
+        children: [
+          for(int i=0; i < cart.length; i++)
+            Row(
+              children: [
+                Text("${cart[i]['name']}", key: Key('item${cart[i]['id']+1}'))
+              ],
+            )
+        ],
+      )
     );
   }
 }
