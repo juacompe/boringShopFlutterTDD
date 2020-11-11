@@ -13,8 +13,12 @@ import 'package:boringshop/main.dart';
 class MyTestApp extends StatelessWidget {
   List<dynamic> items = [
     {
-      'name' : 'Matcha Tofu Tiramisu',
+      'name' : 'google glass',
       'id' : 0,
+    },
+    {
+      'name' : 'rotary phone',
+      'id' : 1,
     },
   ];
 
@@ -35,5 +39,6 @@ void main() {
     await tester.pumpWidget(MyTestApp());
 
     expect(find.byKey(Key('item1')), findsOneWidget);
+    expect(find.byKey(Key('item2')), findsOneWidget);
   });
 }
