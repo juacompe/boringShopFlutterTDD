@@ -68,10 +68,12 @@ class MyHomePage extends HookWidget {
       appBar: AppBar(
         title: Text(title),
         actions: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 60, 0),
-            child: Text("Cart: " + myCart.value.toString()),
-          )
+          GestureDetector(
+            key: Key("checkout"),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 60, 0),
+              child: Text("Cart: " + myCart.value.toString()),
+          ))
         ],
       ),
       body: SingleChildScrollView(
