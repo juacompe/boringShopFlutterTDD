@@ -61,7 +61,15 @@ class MyHomePage extends HookWidget {
     var thumbnailSize = MediaQuery.of(context).size.width * 0.2;
     var itemsPerRow = 4;
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+            child: Text("Cart: 0"),
+          )
+        ],
+      ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
