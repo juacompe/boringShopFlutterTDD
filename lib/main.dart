@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'ProductDetailsPage.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -74,7 +76,13 @@ class MyHomePage extends HookWidget {
                       for(int j = 0; j < (i + 1 == (items.length / itemsPerRow).ceil() ? items.length % itemsPerRow : itemsPerRow); j++)
                         Container(
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailsPage(item: items[(i * itemsPerRow) + j])),
+                              );
+                            },
                             key: Key('item${(i * itemsPerRow) + j + 1}'),
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(10, 10, 10, 30),
