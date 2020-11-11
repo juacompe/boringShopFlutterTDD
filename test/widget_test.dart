@@ -82,6 +82,9 @@ void main() {
       await tester.pumpAndSettle();
 
       await tester.tap(find.byKey(Key('checkout')));
+      await tester.pumpAndSettle();
+
+      expect(find.text("Checkout"), findsOneWidget);
     });
   });
 }
