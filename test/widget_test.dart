@@ -71,4 +71,17 @@ void main() {
       expect(find.text("Cart: 1"), findsOneWidget);
     });
   });
+
+  testWidgets('select an item and put in into shopping cart and check out should see one item', (WidgetTester tester) async {
+    mockNetworkImagesFor(() async {
+      await tester.pumpWidget(MyTestApp());
+      await tester.tap(find.byKey(Key('item2')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(Key('itemDetails')));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(Key('checkout')));
+    });
+  });
 }
