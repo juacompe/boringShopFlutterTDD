@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -24,6 +22,29 @@ class ProductDetailsPage extends HookWidget {
           ),
         ],
       ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FlatButton(
+                      key: Key('item2details'),
+                      child: Text('Add to cart'),
+                      onPressed: () {
+
+                      },
+                    ),
+                  ]),
+              ]
+            )
+          )
+        )
+      )
     );
   }
 }
