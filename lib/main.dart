@@ -6,9 +6,17 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  List<dynamic> items = [];
   @override
   Widget build(BuildContext context) {
+    // Assuming MyApp is the real application, items should come from a real data source
+    List<dynamic> items = [
+      {
+        'name': 'Matcha Tofu Tiramisu',
+        'id': 0,
+        'picture' : 'https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1070850.jpg&fm=jpg',
+      },
+    ];
+
     return MaterialApp(
       title: 'Boring Shop',
       theme: ThemeData(
@@ -27,24 +35,33 @@ class MyHomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    var thumbnailSize = MediaQuery.of(context).size.width * 0.1;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text(title)),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              child: GestureDetector(
-                onTap: () {
-                },
-                key: Key('item1'),
-                child: Text(items[0]['name'])
-              ),
-            )
-          ],
-        ),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20, 40, 20, 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: thumbnailSize,
+                child: GestureDetector(
+                  onTap: () {},
+                  key: Key('item1'),
+                  child: Column(children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(thumbnailSize / 2)),
+                      child: Image(image: NetworkImage(items[0]['picture']), fit: BoxFit.cover)
+                    ),
+                    Padding(padding: EdgeInsets.only(top: 8.0)),
+                    Text(items[0]['name']),
+                  ],)
+                ),
+              )
+            ],
+          ),
+        )
       ),
     );
   }
