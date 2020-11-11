@@ -44,6 +44,11 @@ void main() {
 
       expect(find.byKey(Key('item1')), findsOneWidget);
       expect(find.byKey(Key('item2')), findsOneWidget);
+
+      await tester.tap(find.byKey(Key('item2')));
+      await tester.pump();
+
+      expect(find.byKey(Key('Product Details')), findsOneWidget);
     });
   });
 }
