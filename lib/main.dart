@@ -40,33 +40,37 @@ class MyApp extends StatelessWidget {
       },
     ];
 
+    List<dynamic> cart = [];
+
     return MaterialApp(
       title: 'Boring Shop',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Boring Shop', items: items),
+      home: MyHomePage(title: 'Boring Shop', items: items, cart: cart),
     );
   }
 }
 
 class MyHomePage extends HookWidget {
-  MyHomePage({Key key, this.title, this.items}) : super(key: key);
+  MyHomePage({Key key, this.title, this.items, this.cart}) : super(key: key);
 
   final String title;
   final List<dynamic> items;
+  final List<dynamic> cart;
 
   @override
   Widget build(BuildContext context) {
     var thumbnailSize = MediaQuery.of(context).size.width * 0.2;
     var itemsPerRow = 4;
+    var myCart = useState(0);
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
         actions: [
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
-            child: Text("Cart: 0"),
+            padding: EdgeInsets.fromLTRB(0, 20, 60, 0),
+            child: Text("Cart: " + myCart.value.toString()),
           )
         ],
       ),
@@ -88,8 +92,11 @@ class MyHomePage extends HookWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ProductDetailsPage(item: items[(i * itemsPerRow) + j])),
-                              );
+                                  builder: (context) => ProductDetailsPage(cart: cart, item: items[(i * itemsPerRow) + j])),
+                              ).then((toAdd) {
+                                if (toAdd) cart.add(items[(i * itemsPerRow) + j]);
+                                myCart.value = cart.length;
+                              });
                             },
                             key: Key('item${(i * itemsPerRow) + j + 1}'),
                             child: Padding(

@@ -25,6 +25,8 @@ class MyTestApp extends StatelessWidget {
     },
   ];
 
+  List<dynamic> cart = [];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +34,7 @@ class MyTestApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Boring Shop', items: items),
+      home: MyHomePage(title: 'Boring Shop', items: items, cart: cart),
     );
   }
 }
@@ -57,14 +59,13 @@ void main() {
     });
   });
 
-  testWidgets('select an item and put in into shopping cart', (WidgetTester tester) async {
+  testWidgets('select an item and put in into shopping cart should see one item in cart', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(MyTestApp());
       await tester.tap(find.byKey(Key('item2')));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(Key('item2details')));
-      await tester.tap(find.byKey(Key('back')));
+      await tester.tap(find.byKey(Key('itemDetails')));
       await tester.pumpAndSettle();
 
       expect(find.text("Cart: 1"), findsOneWidget);
