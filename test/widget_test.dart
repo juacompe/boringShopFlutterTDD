@@ -38,7 +38,7 @@ class MyTestApp extends StatelessWidget {
 }
 
 void main() {
-  testWidgets('select an item and put in into shopping cart', (WidgetTester tester) async {
+  testWidgets('click an item and back to main', (WidgetTester tester) async {
     mockNetworkImagesFor(() async {
       await tester.pumpWidget(MyTestApp());
 
@@ -49,6 +49,11 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byKey(Key('Product Details')), findsOneWidget);
+
+      await tester.tap(find.byKey(Key('back')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(Key('item2')), findsOneWidget);
     });
   });
 }
