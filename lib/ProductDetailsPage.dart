@@ -8,6 +8,7 @@ class ProductDetailsPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    var thumbnailSize = MediaQuery.of(context).size.width * 0.5;
     return Scaffold(
       appBar: AppBar(
         title: Text(item['name']),
@@ -29,6 +30,18 @@ class ProductDetailsPage extends HookWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: thumbnailSize,
+                      height: thumbnailSize,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(thumbnailSize / 2)),
+                        child: Image(image: NetworkImage(item['picture']), fit: BoxFit.cover)
+                      )),
+                  ]
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
