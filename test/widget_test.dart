@@ -62,7 +62,12 @@ void main() {
       await tester.pumpWidget(MyTestApp());
       await tester.tap(find.byKey(Key('item2')));
       await tester.pumpAndSettle();
-      expect(find.byKey(Key('item2details')), findsOneWidget);
+
+      await tester.tap(find.byKey(Key('item2details')));
+      await tester.tap(find.byKey(Key('back')));
+      await tester.pumpAndSettle();
+
+      expect(find.text("Cart: 1"), findsOneWidget);
     });
   });
 }
