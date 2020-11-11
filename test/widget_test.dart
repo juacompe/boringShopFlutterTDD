@@ -56,4 +56,13 @@ void main() {
       expect(find.byKey(Key('item2')), findsOneWidget);
     });
   });
+
+  testWidgets('select an item and put in into shopping cart', (WidgetTester tester) async {
+    mockNetworkImagesFor(() async {
+      await tester.pumpWidget(MyTestApp());
+      await tester.tap(find.byKey(Key('item2')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key('item2details')), findsOneWidget);
+    });
+  });
 }
