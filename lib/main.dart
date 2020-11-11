@@ -64,7 +64,7 @@ class MyHomePage extends HookWidget {
   Widget build(BuildContext context) {
     var thumbnailSize = MediaQuery.of(context).size.width * 0.2;
     var itemsPerRow = 4;
-    var myCart = useState(0);
+    var myCart = useState(cart);
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -75,12 +75,12 @@ class MyHomePage extends HookWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CheckOutPage(cart: cart)),
+                  builder: (context) => CheckOutPage(cart: myCart.value)),
               );
             },
             child: Padding(
               padding: EdgeInsets.fromLTRB(0, 20, 60, 0),
-              child: Text("Cart: " + myCart.value.toString()),
+              child: Text("Cart: " + myCart.value.length.toString()),
           ))
         ],
       ),
@@ -105,7 +105,7 @@ class MyHomePage extends HookWidget {
                                   builder: (context) => ProductDetailsPage(cart: cart, item: items[(i * itemsPerRow) + j])),
                               ).then((toAdd) {
                                 if (toAdd) cart.add(items[(i * itemsPerRow) + j]);
-                                myCart.value = cart.length;
+                                myCart.value = []..addAll(cart);
                               });
                             },
                             key: Key('item${(i * itemsPerRow) + j + 1}'),
