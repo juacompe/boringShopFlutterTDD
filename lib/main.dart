@@ -44,18 +44,19 @@ class MyHomePage extends HookWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              for (int i=0; i<items.length; i++)
               Container(
                 width: thumbnailSize,
                 child: GestureDetector(
                   onTap: () {},
-                  key: Key('item1'),
+                  key: Key('item${i+1}'),
                   child: Column(children: [
                     ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(thumbnailSize / 2)),
-                      child: Image(image: NetworkImage(items[0]['picture']), fit: BoxFit.cover)
+                      child: Image(image: NetworkImage(items[i]['picture']), fit: BoxFit.cover)
                     ),
                     Padding(padding: EdgeInsets.only(top: 8.0)),
-                    Text(items[0]['name']),
+                    Text(items[i]['name']),
                   ],)
                 ),
               )
