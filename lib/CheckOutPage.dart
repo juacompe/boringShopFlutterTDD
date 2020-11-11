@@ -19,7 +19,9 @@ class CheckOutPage extends HookWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 Row(children: [
-                  Text("Items:")
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: Text("Items:"))
                 ]),
                 itemList(),
               ]
