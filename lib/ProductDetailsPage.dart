@@ -14,6 +14,15 @@ class ProductDetailsPage extends HookWidget {
       appBar: AppBar(
         title: Text(item['name']),
         key: Key('Product Details'),
+        actions: [
+          Container(
+            child: GestureDetector(
+              key: Key('back'),
+              child: Text('<'),
+              onTap: () => Navigator.of(context).pop()
+            )
+          ),
+        ],
       ),
     );
   }
