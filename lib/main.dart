@@ -59,12 +59,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends HookWidget {
-  MyHomePage({Key key, this.title, this.items, this.cart}) : super(key: key) {
-    myItems = Items(this.items);
+  MyHomePage({Key key, this.title, items, this.cart}) : super(key: key) {
+    myItems = Items(items);
   }
 
   final String title;
-  final List<dynamic> items;
   Items myItems;
   final List<dynamic> cart;
 
@@ -101,12 +100,7 @@ class MyHomePage extends HookWidget {
               children: <Widget>[
                 for (int i = 0; i < myItems.totalNumberOfRows(); i++)
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    for (int j = 0;
-                        j <
-                            (i + 1 == myItems.totalNumberOfRows()
-                                ? items.length % itemsPerRow
-                                : itemsPerRow);
-                        j++)
+                    for (int j = 0; j < myItems.totalNumberOfItemOnRow(i); j++)
                       Container(
                         child: GestureDetector(
                             onTap: () {
@@ -114,15 +108,13 @@ class MyHomePage extends HookWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ProductDetailsPage(
-                                        cart: cart,
-                                        item: items[(i * itemsPerRow) + j])),
+                                        cart: cart, item: myItems.item(i, j))),
                               ).then((toAdd) {
-                                if (toAdd)
-                                  cart.add(items[(i * itemsPerRow) + j]);
+                                if (toAdd) cart.add(myItems.item(i, j));
                                 myCart.value = []..addAll(cart);
                               });
                             },
-                            key: Key('item${(i * itemsPerRow) + j + 1}'),
+                            key: Key(myItems.key(i, j)),
                             child: Padding(
                                 padding: EdgeInsets.fromLTRB(10, 10, 10, 30),
                                 child: Column(
@@ -136,13 +128,12 @@ class MyHomePage extends HookWidget {
                                               Radius.circular(
                                                   thumbnailSize / 2)),
                                           child: Image(
-                                              image: NetworkImage(
-                                                  items[(i * itemsPerRow) + j]
-                                                      ['picture']),
+                                              image: NetworkImage(myItems.item(
+                                                  i, j)['picture']),
                                               fit: BoxFit.cover)),
                                     ),
                                     Padding(padding: EdgeInsets.only(top: 8.0)),
-                                    Text(items[(i * itemsPerRow) + j]['name']),
+                                    Text(myItems.item(i, j)['name']),
                                   ],
                                 ))),
                       )
